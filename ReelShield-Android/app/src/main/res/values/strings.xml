@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ReelShield</string>
+    <string name="accessibility_service_description">ReelShield detects when addictive Shorts or Reels open in YouTube, Instagram, or Facebook, and automatically redirects you back to safety while counting your digital wellbeing stats.</string>
+</resources>

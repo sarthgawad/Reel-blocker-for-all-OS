@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "ReelShield for Safari (iOS)",
+  "version": "1.0.0",
+  "description": "Block addictive Reels & Shorts on Safari for iOS with a floating counter bar.",
+  "permissions": [
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.instagram.com/*",
+        "*://*.facebook.com/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
+}

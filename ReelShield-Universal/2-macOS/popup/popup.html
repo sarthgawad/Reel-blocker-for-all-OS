@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ReelShield Control Hub</title>
+  <link rel="stylesheet" href="popup.css">
+  <style>
+    /* Attractive Made by Sarth footer style */
+    .sarth-credit {
+      text-align: center;
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border-color);
+      font-size: 11px;
+      letter-spacing: 0.6px;
+      color: #94a3b8;
+    }
+    .sarth-credit b {
+      background: linear-gradient(135deg, #a5b4fc 0%, #f0abfc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 800;
+      letter-spacing: 0.8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="popup-header">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 12 2 2 4-4"/>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">ReelShield</h1>
+          <p class="brand-sub">Shorts & Reels Blocker</p>
+        </div>
+      </div>
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span class="status-text">Active</span>
+      </div>
+    </header>
+
+    <!-- Today's Impact Card with Circular Bordered Number & Rectangular Bar -->
+    <div class="impact-card">
+      <div class="impact-header">
+        <span class="impact-title">TODAY'S USAGE</span>
+        <span class="impact-badge" id="limit-status-badge">Within Limit</span>
+      </div>
+
+      <!-- The requested small number with circular border rectangular bar -->
+      <div class="counter-rectangular-bar">
+        <div class="counter-circle-border" id="popup-circle-counter">
+          <span id="popup-total-seen">0</span>
+        </div>
+        <div class="counter-bar-text">
+          <span class="counter-bar-label">Total Reels Encountered</span>
+          <span class="counter-bar-sub">Across YT, Insta & Facebook</span>
+        </div>
+      </div>
+
+      <!-- Quick Stats Row -->
+      <div class="metrics-grid">
+        <div class="metric-item">
+          <span class="metric-val text-green" id="popup-blocked-count">0</span>
+          <span class="metric-lbl">Blocked</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-val text-cyan" id="popup-time-saved">0m</span>
+          <span class="metric-lbl">Time Saved</span>
+        </div>
+        <div class="metric-item">
+          <span class="metric-val text-purple" id="popup-focus-score">100%</span>
+          <span class="metric-lbl">Focus Score</span>
+        </div>
+      </div>
+
+      <!-- Platform Breakdown Row -->
+      <div class="platform-counts">
+        <div class="platform-chip yt">
+          <span class="platform-dot red"></span>
+          <span>YT Shorts:</span>
+          <b id="popup-yt-count">0</b>
+        </div>
+        <div class="platform-chip ig">
+          <span class="platform-dot purple"></span>
+          <span>Insta:</span>
+          <b id="popup-ig-count">0</b>
+        </div>
+        <div class="platform-chip fb">
+          <span class="platform-dot blue"></span>
+          <span>FB:</span>
+          <b id="popup-fb-count">0</b>
+        </div>
+      </div>
+    </div>
+
+    <!-- Platform Blockers Toggles -->
+    <div class="section-card">
+      <h2 class="section-title">Blocking Controls</h2>
+      
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-name">YouTube Shorts Blocker</span>
+          <span class="toggle-desc">Hides shelves, feeds, and redirects /shorts/</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-yt" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-name">YouTube Pop-Up Shorts</span>
+          <span class="toggle-desc">Blocks in-player teaser cards & end screens</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-yt-popups" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-name">Instagram Reels Blocker</span>
+          <span class="toggle-desc">Hides Reels tabs, explore tiles & feeds</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-ig" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-name">Facebook Reels Blocker</span>
+          <span class="toggle-desc">Blocks Reels carousels & watch trays</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-fb" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <div class="toggle-row">
+        <div class="toggle-info">
+          <span class="toggle-name">In-Page Floating Counter Bar</span>
+          <span class="toggle-desc">Show draggable circular counter pill on sites</span>
+        </div>
+        <label class="switch">
+          <input type="checkbox" id="toggle-floating-bar" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Daily Focus Goal -->
+    <div class="section-card">
+      <h2 class="section-title">Daily Focus Goal</h2>
+      <div class="limit-input-row">
+        <label for="input-daily-limit" class="limit-label">Daily Reel Limit:</label>
+        <div class="limit-input-wrapper">
+          <input type="number" id="input-daily-limit" min="0" max="100" value="0">
+          <span class="limit-unit">reels (0 = none)</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Actions Footer -->
+    <footer class="popup-footer">
+      <button class="btn btn-secondary" id="btn-reset-stats" title="Reset Today's Counter">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+          <path d="M3 3v5h5"/>
+        </svg>
+        Reset Day
+      </button>
+
+      <button class="btn btn-primary" id="btn-open-dashboard" title="Open Full Analytics Dashboard">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <line x1="3" y1="9" x2="21" y2="9"/>
+          <line x1="9" y1="21" x2="9" y2="9"/>
+        </svg>
+        Analytics
+      </button>
+    </footer>
+
+    <!-- User Requested Attribution in attractive small font -->
+    <div class="sarth-credit">
+      ✨ Made with ❤️ by <b>Sarth</b>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

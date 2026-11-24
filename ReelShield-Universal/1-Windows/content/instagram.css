@@ -1,0 +1,12 @@
+/* Declarative Instant-Hide Rules for Instagram Reels */
+
+/* Hide Reels Navigation Item in Sidebar & Bottom Navigation */
+a[href*="/reels/"],
+svg[aria-label="Reels"] {
+  display: none !important;
+}
+
+/* Hide Reels Sections in Feed */
+article:has(a[href*="/reel/"]) {
+  display: none !important;
+}

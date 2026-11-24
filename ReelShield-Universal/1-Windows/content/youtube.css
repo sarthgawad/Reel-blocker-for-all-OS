@@ -1,0 +1,28 @@
+/* Declarative Instant-Hide Rules for YouTube Shorts & Popups */
+
+/* Sidebar Shorts Button */
+ytd-guide-entry-renderer:has(a[title="Shorts"]),
+ytd-mini-guide-entry-renderer[aria-label="Shorts"],
+a#endpoint[title="Shorts"] {
+  display: none !important;
+}
+
+/* Shorts Shelves on Home, Search, and Feed */
+ytd-rich-shelf-renderer[is-shorts],
+ytd-reel-shelf-renderer,
+ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-shorts]) {
+  display: none !important;
+}
+
+/* Individual Shorts Tiles in Feeds */
+ytd-rich-item-renderer:has(a[href*="/shorts/"]),
+ytd-video-renderer:has(a[href*="/shorts/"]),
+ytd-compact-video-renderer:has(a[href*="/shorts/"]) {
+  display: none !important;
+}
+
+/* In-player End Screen Shorts Popups */
+.ytp-ce-element:has(a[href*="/shorts/"]),
+.ytp-cards-teaser:has(a[href*="/shorts/"]) {
+  display: none !important;
+}

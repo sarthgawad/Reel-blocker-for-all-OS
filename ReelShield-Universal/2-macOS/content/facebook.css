@@ -1,0 +1,14 @@
+/* Declarative Instant-Hide Rules for Facebook Reels */
+
+/* Hide Left Navigation Reels Shortcut */
+a[href*="/reel/"],
+a[href*="/watch/reels/"],
+div[aria-label="Reels"] {
+  display: none !important;
+}
+
+/* Hide Reels and Short Videos Trays in Feed */
+div[aria-label*="Reels and short videos"],
+div[data-pagelet*="Reels"] {
+  display: none !important;
+}

@@ -1,0 +1,83 @@
+{
+  "manifest_version": 3,
+  "name": "ReelShield - Shorts & Reels Blocker",
+  "version": "1.0.0",
+  "description": "Block addictive Instagram Reels, YouTube Shorts & popups, and Facebook Reels. Track reels seen with a sleek floating counter bar.",
+  "author": "ReelShield Team",
+  "permissions": [
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "*://*.youtube.com/*",
+    "*://*.instagram.com/*",
+    "*://*.facebook.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "ReelShield Control Hub",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "options_page": "dashboard/dashboard.html",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.instagram.com/*",
+        "*://*.facebook.com/*"
+      ],
+      "js": [
+        "content/counter-bar.js",
+        "content/blocker-overlay.js"
+      ],
+      "css": [
+        "content/counter-bar.css",
+        "content/blocker-overlay.css"
+      ],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://*.youtube.com/*"],
+      "js": ["content/youtube.js"],
+      "css": ["content/youtube.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://*.instagram.com/*"],
+      "js": ["content/instagram.js"],
+      "css": ["content/instagram.css"],
+      "run_at": "document_start"
+    },
+    {
+      "matches": ["*://*.facebook.com/*"],
+      "js": ["content/facebook.js"],
+      "css": ["content/facebook.css"],
+      "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/*",
+        "content/*"
+      ],
+      "matches": [
+        "*://*.youtube.com/*",
+        "*://*.instagram.com/*",
+        "*://*.facebook.com/*"
+      ]
+    }
+  ]
+}
